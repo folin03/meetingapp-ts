@@ -8,6 +8,11 @@ import {
 } from 'react-native';
 import {styles} from '../styles';
 import {TextInput} from 'react-native-paper';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthStackParamList} from './StackParams';
+
+type authScreenProp = StackNavigationProp<AuthStackParamList, 'Auth'>;
 
 const DismissKeyboard = ({children}) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -15,9 +20,11 @@ const DismissKeyboard = ({children}) => (
   </TouchableWithoutFeedback>
 );
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = () => {
   const [inputName, setInputName] = useState('');
   const [inputPassword, setInputPassword] = useState('');
+
+  const navigation = useNavigation<authScreenProp>();
 
   return (
     <DismissKeyboard>
@@ -58,12 +65,12 @@ const LoginScreen = ({navigation}) => {
             />
             <Button
               title={'Login'}
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => {}}
             />
           </View>
           <Button
             title={'Reset Password'}
-            onPress={() => navigation.navigate('Forgoten_Password')}
+            onPress={() => navigation.navigate('ForgotPassword')}
           />
         </View>
       </View>

@@ -12,6 +12,11 @@ import {styles} from '../styles';
 // import { DismissKeyboard } from '../styles/dismissKeyboard';
 import {TextInput} from 'react-native-paper';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthStackParamList} from './StackParams';
+
+type authScreenProp = StackNavigationProp<AuthStackParamList, 'Auth'>;
 
 const DismissKeyboard = ({children}) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -19,7 +24,7 @@ const DismissKeyboard = ({children}) => (
   </TouchableWithoutFeedback>
 );
 
-const RegisterScreen = ({navigation}) => {
+const RegisterScreen = () => {
   const [inputName, setInputName] = useState('');
   const [inputEmail, setInputEmail] = useState('');
   const [inputPassword, setInputPassword] = useState('');
@@ -27,6 +32,8 @@ const RegisterScreen = ({navigation}) => {
   const [nameValidation, setNameValidation] = useState(' ');
   const [emailValidation, setEmailValidation] = useState(' ');
   const [passwordValidation, setPasswordValidation] = useState(' ');
+
+  const navigation = useNavigation<authScreenProp>();
 
   const SendRegistration = () => {
     fetch('https://meet-me-app.herokuapp.com/dj-rest-auth/registration/', {
